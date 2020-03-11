@@ -1,90 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout>
 
-    <FrameLayout
-        android:id="@+id/custom_camera_frame"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextureView
-            android:id="@+id/texture"
+        <FrameLayout
+            android:id="@+id/custom_camera_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/custom_camera_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:src="@drawable/close" />
-
-        <Button
-            android:id="@+id/custom_camera_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="20dp"
-            android:background="@drawable/button_white_rounded"
-            android:text="Done"
-            android:textColor="@color/colorPrimary"
-            android:visibility="gone" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="vertical">
-
-            <view
-                android:id="@+id/custom_camera_recyclerview"
-                class="androidx.appcompat.app.AlertController$RecycleListView"
+            <TextureView
+                android:id="@+id/texture"
                 android:layout_width="match_parent"
-                android:layout_height="140dp" />
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/custom_camera_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:src="@drawable/close" />
+
+            <Button
+                android:id="@+id/custom_camera_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="20dp"
+                android:background="@drawable/button_white_rounded"
+                android:text="Upload"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/custom_camera_flash"
-                    android:layout_width="0dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:clipToPadding="false"
+                    android:padding="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_flash_off_black_24dp"
-                    android:tint="@color/white" />
+                    android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/custom_camera_capture"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/intercom_solid_circle"
-                    android:tint="@color/colorPrimary" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/custom_camera_flash"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_flash_off_black_24dp"
+                        android:tint="@color/white" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/custom_camera_rotate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_rotate_black_24dp"
-                    android:tint="@color/white" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/custom_camera_capture"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/intercom_solid_circle"
+                        android:tint="@color/colorPrimary" />
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/custom_camera_rotate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_rotate_black_24dp"
+                        android:tint="@color/white" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+
+        </FrameLayout>
 
 
-    </FrameLayout>
-
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
