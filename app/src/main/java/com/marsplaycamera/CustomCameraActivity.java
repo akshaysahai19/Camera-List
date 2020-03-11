@@ -50,6 +50,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.marsplaycamera.databinding.CameraLayoutBinding;
 import com.marsplaycamera.image_operation.PreviewZoomActivity;
 import com.marsplaycamera.utils.GenericFileProvider;
+import com.marsplaycamera.utils.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
@@ -192,7 +193,7 @@ public class CustomCameraActivity extends AppCompatActivity
 
     private void setupRecyclerView() {
         cameraLayoutBinding.recyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        customCameraRecyclerAdapter = new CustomCameraRecyclerAdapter(this, imgs_path_array);
+        customCameraRecyclerAdapter = new CustomCameraRecyclerAdapter(this, imgs_path_array,0);
         cameraLayoutBinding.recyclerview.setAdapter(customCameraRecyclerAdapter);
     }
 
@@ -466,14 +467,11 @@ public class CustomCameraActivity extends AppCompatActivity
             case R.id.custom_camera_done:
 
                 if (imgs_path_array.size() > 0) {
-//                    Intent intent = new Intent(CustomCameraActivity.this, DescriptionActivity.class);
-//                    intent.putStringArrayListExtra("data", imgs_path_array);
-//                    intent.putExtra(SurveyActivity.EXISTING_TAGS, existing_tags);
-//                    intent.putExtra("type", "image");
-//                    startActivityForResult(intent, 101);
-                } else {
-                    finish();
+                    Intent intent = new Intent();
+                    intent.putStringArrayListExtra("IMAGE_PATHS", imgs_path_array);
+                    setResult(RESULT_OK, intent);
                 }
+                finish();
 
 
                 break;
@@ -615,49 +613,10 @@ public class CustomCameraActivity extends AppCompatActivity
     @Override
     public void imageClicked(int pos) {
         selectedPos = pos;
-//        File file = new File(imgs_path_array.get(pos));
-//        CropImage.activity(Uri.fromFile(file))
-//                .start(this);
-        lock();
-        showOpDialog();
+        Utils.showOpDialog(imgs_path_array,this,selectedPos);
     }
 
-    private void showOpDialog() {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this);
 
-        builder.setCancelable(false)
-                .setTitle("Select Operation")
-                .setMessage("What operation, would you like to perform with the image?")
-                .setPositiveButton("Crop", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        File file = new File(imgs_path_array.get(selectedPos));
-                        CropImage.activity(Uri.fromFile(file))
-                                .start(CustomCameraActivity.this);
-
-                    }
-                }).setNegativeButton("Zoom", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int id) {
-
-                Intent intent = new Intent(CustomCameraActivity.this, PreviewZoomActivity.class);
-                intent.putExtra("image_path", imgs_path_array.get(selectedPos));
-                startActivity(intent);
-
-            }
-        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int id) {
-                unlock();
-                dialog.dismiss();
-
-            }
-        });
-
-        builder.create().show();
-    }
 
 
 }

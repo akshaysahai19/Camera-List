@@ -19,6 +19,7 @@ public class CustomCameraRecyclerAdapter extends RecyclerView.Adapter<CustomCame
     private ArrayList<String> imagePathList;
     private Context context;
     private ImageListInterface imageListInterface;
+    private int type = 0;
 
     public interface ImageListInterface {
 
@@ -27,9 +28,10 @@ public class CustomCameraRecyclerAdapter extends RecyclerView.Adapter<CustomCame
         void imageClicked(int pos);
     }
 
-    public CustomCameraRecyclerAdapter(Context context, ArrayList<String> imagePathList) {
+    public CustomCameraRecyclerAdapter(Context context, ArrayList<String> imagePathList, int ype) {
         this.imagePathList = imagePathList;
         this.context = context;
+        this.type = type;
         imageListInterface = (ImageListInterface) context;
     }
 
@@ -37,8 +39,16 @@ public class CustomCameraRecyclerAdapter extends RecyclerView.Adapter<CustomCame
     @Override
     public CustomCameraRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CameraPreviewCardsBinding cardsBinding = DataBindingUtil.inflate(LayoutInflater.from(context),
-                R.layout.camera_preview_cards, parent, false);
+                getLayout(), parent, false);
         return new MyViewHolder(cardsBinding);
+    }
+
+    private int getLayout() {
+        if (type==0){
+            return R.layout.camera_preview_cards;
+        }else {
+            return R.layout.selected_preview_cards;
+        }
     }
 
     @Override

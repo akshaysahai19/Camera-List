@@ -25,7 +25,7 @@ public class PreviewZoomActivity extends AppCompatActivity {
         }
 
         Glide.with(this)
-                .load(getIntent().getStringExtra("image_path"))
+                .load(getIntent().getStringExtra("IMAGE_PATH"))
                 .into(binding.photoView);
     }
 
