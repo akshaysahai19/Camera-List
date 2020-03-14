@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Utils {
 
-    public static void showOpDialog(final ArrayList<String> imgs_path_array, final Activity activity, final int pos) {
+    public static void showOpDialog(final String path, final Activity activity, final int pos) {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(activity);
 
@@ -28,7 +28,7 @@ public class Utils {
 
                         dialog.dismiss();
 
-                        File file = new File(imgs_path_array.get(pos));
+                        File file = new File(path);
                         CropImage.activity(Uri.fromFile(file))
                                 .start(activity);
 
@@ -40,7 +40,7 @@ public class Utils {
                 dialog.dismiss();
 
                 Intent intent = new Intent(activity, PreviewZoomActivity.class);
-                intent.putExtra("IMAGE_PATH", imgs_path_array.get(pos));
+                intent.putExtra("IMAGE_PATH", path);
                 activity.startActivity(intent);
 
             }
@@ -55,10 +55,5 @@ public class Utils {
         builder.create().show();
     }
 
-    public static void startUploadActivity(ArrayList<String> img_path, Activity activity) {
-        Intent intent = new Intent(activity, UploadActivity.class);
-        intent.putExtra("IMAGE_PATHS", img_path);
-        activity.startActivity(intent);
-    }
 
 }

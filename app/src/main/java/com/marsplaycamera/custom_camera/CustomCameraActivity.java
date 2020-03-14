@@ -1,15 +1,9 @@
-package com.marsplaycamera;
+package com.marsplaycamera.custom_camera;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.Sensor;
@@ -26,10 +20,7 @@ import android.hardware.camera2.CaptureFailure;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
@@ -42,25 +33,19 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.marsplaycamera.R;
 import com.marsplaycamera.databinding.CameraLayoutBinding;
-import com.marsplaycamera.image_operation.PreviewZoomActivity;
 import com.marsplaycamera.utils.GenericFileProvider;
 import com.marsplaycamera.utils.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Locale;
 
 public class CustomCameraActivity extends AppCompatActivity
         implements View.OnClickListener, View.OnTouchListener, SensorEventListener, CustomCameraRecyclerAdapter.ImageListInterface {
@@ -193,7 +178,7 @@ public class CustomCameraActivity extends AppCompatActivity
 
     private void setupRecyclerView() {
         cameraLayoutBinding.recyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        customCameraRecyclerAdapter = new CustomCameraRecyclerAdapter(this, imgs_path_array,0);
+        customCameraRecyclerAdapter = new CustomCameraRecyclerAdapter(this, imgs_path_array);
         cameraLayoutBinding.recyclerview.setAdapter(customCameraRecyclerAdapter);
     }
 
@@ -613,7 +598,7 @@ public class CustomCameraActivity extends AppCompatActivity
     @Override
     public void imageClicked(int pos) {
         selectedPos = pos;
-        Utils.showOpDialog(imgs_path_array,this,selectedPos);
+        Utils.showOpDialog(imgs_path_array.get(pos),this,selectedPos);
     }
 
 

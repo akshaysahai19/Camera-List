@@ -1,4 +1,4 @@
-package com.marsplaycamera;
+package com.marsplaycamera.custom_camera;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.marsplaycamera.R;
 import com.marsplaycamera.databinding.CameraPreviewCardsBinding;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class CustomCameraRecyclerAdapter extends RecyclerView.Adapter<CustomCame
     private ArrayList<String> imagePathList;
     private Context context;
     private ImageListInterface imageListInterface;
-    private int type = 0;
 
     public interface ImageListInterface {
 
@@ -28,10 +28,9 @@ public class CustomCameraRecyclerAdapter extends RecyclerView.Adapter<CustomCame
         void imageClicked(int pos);
     }
 
-    public CustomCameraRecyclerAdapter(Context context, ArrayList<String> imagePathList, int ype) {
+    public CustomCameraRecyclerAdapter(Context context, ArrayList<String> imagePathList) {
         this.imagePathList = imagePathList;
         this.context = context;
-        this.type = type;
         imageListInterface = (ImageListInterface) context;
     }
 
@@ -44,11 +43,7 @@ public class CustomCameraRecyclerAdapter extends RecyclerView.Adapter<CustomCame
     }
 
     private int getLayout() {
-        if (type==0){
-            return R.layout.camera_preview_cards;
-        }else {
-            return R.layout.selected_preview_cards;
-        }
+        return R.layout.camera_preview_cards;
     }
 
     @Override
